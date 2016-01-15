@@ -14,7 +14,7 @@ namespace PeopleSearch.Model
 
         }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [MaxLength(50)]
         public string FirstName { get; set; }
