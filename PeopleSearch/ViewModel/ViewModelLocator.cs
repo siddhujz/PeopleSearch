@@ -40,6 +40,7 @@ namespace PeopleSearch.ViewModel
 
             SimpleIoc.Default.Register<IDataService, DataService>();
 
+            SimpleIoc.Default.Register<UserViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
         }
 
@@ -57,6 +58,13 @@ namespace PeopleSearch.ViewModel
             }
         }
 
+        public UserViewModel UserVM
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<UserViewModel>();
+            }
+        }
         /// <summary>
         /// Cleans up all the resources.
         /// </summary>

@@ -1,6 +1,9 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using PeopleSearch.MessageInfrastructure;
 using PeopleSearch.Model;
+using PeopleSearch.Services;
 using System;
 using System.Collections.ObjectModel;
 
@@ -49,6 +52,7 @@ namespace PeopleSearch.ViewModel
         #region Command Object Declarations
         public RelayCommand ReadAllUsersCommand { get; set; }
         public RelayCommand SearchUsersCommand { get; set; }
+        public RelayCommand SendUserCommand { get; set; }
         #endregion
 
         /// <summary>
@@ -66,6 +70,8 @@ namespace PeopleSearch.ViewModel
                 ReadAllUsersCommand.Execute(null);
 
             SearchUsersCommand = new RelayCommand(SearchUsers);
+
+            SendUserCommand = new RelayCommand(SendEstimate);
         }
 
 
@@ -96,17 +102,35 @@ namespace PeopleSearch.ViewModel
         public void SearchUsers()
         {
             Users.Clear();
-            _dataService.GetUsersByName(
-                (users, error) =>
-                {
-                    if (error != null)
+            if(Username != null && Username.Trim().Length > 0)
+            {
+                _dataService.GetUsersByName(
+                    (users, error) =>
                     {
+                        if (error != null)
+                        {
                         // Report error here
                         Console.WriteLine("The following exception has been raised: " + error);
-                        return;
-                    }
-                    Users = users;
-                }, Username);
+                            return;
+                        }
+                        Users = users;
+                    }, Username);
+            } else
+            {
+                GetUsers();
+            }
+        }
+
+        /// <summary>
+        /// The method to send a message to add a new user
+        /// to the UserViewModel
+        /// </summary>
+        public void SendEstimate()
+        {
+            User user = new User();
+
+            //Send User as a message to UserViewModel for opening a new window.
+            Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator() { User = user }, MessengerToken.AddUser);
         }
 
         ////public override void Cleanup()

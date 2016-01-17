@@ -9,6 +9,6 @@ namespace PeopleSearch.MessageInfrastructure
 {
     public class MessageCommunicator
     {
-        public User Usr { get; set; }
+        public User User { get; set; }
     }
 }

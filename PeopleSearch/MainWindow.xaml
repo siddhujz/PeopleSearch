@@ -8,8 +8,7 @@
         Height="900"
         Width="1280"
         Title="People Search"
-        WindowStartupLocation="CenterScreen"
-        WindowState="Maximized" WindowStyle="None"
+        WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     
     <Window.Resources>

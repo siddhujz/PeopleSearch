@@ -10,7 +10,7 @@
              d:DesignHeight="360" d:DesignWidth="480">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -33,5 +33,9 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
+
+        <Button x:Name="btnAddUser" Content="Add a New Person"
+                Grid.Row="0" HorizontalAlignment="Right"
+                Command="{Binding SendUserCommand, Mode=OneWay}" />
     </Grid>
 </UserControl>
