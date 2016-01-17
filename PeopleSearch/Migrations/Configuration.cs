@@ -28,8 +28,8 @@ namespace PeopleSearch.Migrations
             //
 
             context.Users.AddOrUpdate(
-                u=>u.FirstName,
-                new Model.User { UserId=1, FirstName="Siddhartha", LastName="Kodali", DateOfBirth=new DateTime(1992,01,09), AddressLine1="1100 Oakcrest St", AddressLine2="Apt J", City="Iowa City", State="Iowa", Zipcode="52246", Interests="I like playing Play Fifa, Cricket, Badminton" },
+                u => u.FirstName,
+                new Model.User { UserId = 1, FirstName = "Siddhartha", LastName = "Kodali", DateOfBirth = new DateTime(1992, 01, 09), AddressLine1 = "1100 Oakcrest St", AddressLine2 = "Apt J", City = "Iowa City", State = "Iowa", Zipcode = "52246", Interests = "I like playing Play Fifa, Cricket, Badminton" },
                 new Model.User { UserId = 2, FirstName = "Balaji", LastName = "Thiruppathi", DateOfBirth = new DateTime(1992, 04, 19), AddressLine1 = "1100 Oakcrest St", AddressLine2 = "Apt J", City = "Iowa City", State = "Iowa", Zipcode = "52246", Interests = "I love coding, building android applications." }
                 );
         }

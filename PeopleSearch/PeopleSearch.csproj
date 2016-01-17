@@ -84,10 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MessageInfrastructure\MessageClass.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\ManagerDBContext.cs" />
-    <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Model\DataItem.cs" />
     <Compile Include="Model\DataService.cs" />
     <Compile Include="Model\IDataService.cs" />
     <Compile Include="Model\User.cs" />

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PeopleSearch.Model
 {
-    class User
+    public class User
     {
         public User()
         {

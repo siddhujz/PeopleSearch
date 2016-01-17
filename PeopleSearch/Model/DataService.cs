@@ -1,15 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PeopleSearch.Model
 {
     public class DataService : IDataService
     {
-        public void GetData(Action<DataItem, Exception> callback)
+        ManagerDBContext ctx;
+        public DataService()
         {
-            // Use this to connect to the actual data service
+            ctx = new ManagerDBContext();
+        }
 
-            var item = new DataItem("Welcome to MVVM Light");
-            callback(item, null);
+        public void GetUsers(Action<ObservableCollection<User>, Exception> callback)
+        {
+            try
+            {
+                ObservableCollection<User> users = new ObservableCollection<User>();
+                foreach (var item in ctx.Users.OrderBy(e => e.FirstName))
+                {
+                    users.Add(item);
+                }
+                callback(users, null);
+            }
+            catch (Exception e)
+            {
+                callback(new ObservableCollection<User>(), e);
+            }
         }
     }
 }

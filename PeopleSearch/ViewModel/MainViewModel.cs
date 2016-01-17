@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using PeopleSearch.Model;
+using System;
+using System.Collections.ObjectModel;
 
 namespace PeopleSearch.ViewModel
 {
@@ -14,27 +16,20 @@ namespace PeopleSearch.ViewModel
         private readonly IDataService _dataService;
 
         /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        private string _welcomeTitle = string.Empty;
-
-        /// <summary>
-        /// Gets the WelcomeTitle property.
+        /// Gets Users property.
         /// Changes to that property's value raise the PropertyChanged event. 
         /// </summary>
-        public string WelcomeTitle
+        ObservableCollection<User> _Users;
+        public ObservableCollection<User> Users
         {
-            get
-            {
-                return _welcomeTitle;
-            }
+            get { return _Users; }
             set
             {
-                Set(ref _welcomeTitle, value);
+                _Users = value;
+                RaisePropertyChanged("Users");
             }
         }
+
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -42,16 +37,17 @@ namespace PeopleSearch.ViewModel
         public MainViewModel(IDataService dataService)
         {
             _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
+            _dataService.GetUsers(
+                (users, error) =>
                 {
                     if (error != null)
                     {
                         // Report error here
+                        Console.WriteLine("The following exception has been raised: " + error);
                         return;
                     }
 
-                    WelcomeTitle = item.Title;
+                    Users = users;
                 });
         }
 
