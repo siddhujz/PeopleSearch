@@ -9,5 +9,6 @@ namespace PeopleSearch.Model
     public interface IDataService
     {
         void GetUsers(Action<ObservableCollection<User>, Exception> callback);
+        void GetUsersByName(Action<ObservableCollection<User>, Exception> callback, String username);
     }
 }

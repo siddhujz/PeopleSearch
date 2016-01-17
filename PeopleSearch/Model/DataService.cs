@@ -15,6 +15,7 @@ namespace PeopleSearch.Model
             ctx = new ManagerDBContext();
         }
 
+        //Method to get users from the database
         public void GetUsers(Action<ObservableCollection<User>, Exception> callback)
         {
             try
@@ -25,6 +26,22 @@ namespace PeopleSearch.Model
                     users.Add(item);
                 }
                 callback(users, null);
+            }
+            catch (Exception e)
+            {
+                callback(new ObservableCollection<User>(), e);
+            }
+        }
+
+        //Method to get users from the database based on the search criteria(First Name or Last Name)
+        public void GetUsersByName(Action<ObservableCollection<User>, Exception> callback, String username)
+        {
+            try
+            {
+                var users = ctx.Users.
+                    Where(x => x.FirstName.ToLower().Contains(username.ToLower()) || x.LastName.ToLower().Contains(username.ToLower()));
+
+                callback(new ObservableCollection<User> (users), null);
             }
             catch (Exception e)
             {
