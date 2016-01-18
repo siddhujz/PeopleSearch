@@ -4,21 +4,62 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PeopleSearch.Views"
+             xmlns:converts="clr-namespace:PeopleSearch.Services"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
              d:DesignHeight="360" d:DesignWidth="480">
     <Grid>
+        <Grid.Resources>
+            <converts:BinaryImageConverter x:Key="imgConverter" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <ListView Margin="10"  Grid.Row="2" ItemsSource="{Binding Users}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Text="{Binding FirstName}" />
+                        <TextBlock Text="{Binding LastName}" />
+                        <TextBlock Text="{Binding AddressLine1}" />
+                        <TextBlock Text="{Binding AddressLine2}" />
+                        <TextBlock Text="{Binding City}" />
+                        <TextBlock Text="{Binding State}" />
+                        <TextBlock Text="{Binding Zipcode}" />
+                        
+                        <!-- Image Control -->
+                        <Image Source="{Binding Path=UserPhoto, Converter={StaticResource imgConverter}}" Stretch="UniformToFill" StretchDirection="Both">
+                            <Image.BitmapEffect>
+                                <DropShadowBitmapEffect Color="Black" />
+                            </Image.BitmapEffect>
+                        </Image>
 
-        <DataGrid x:Name="dgusers" Grid.Row="1" ItemsSource="{Binding Users}" ColumnWidth="*"  Margin="0,10,0,10" RenderTransformOrigin="0.5,0.5" IsReadOnly="True">
+                        <TextBlock Text="{Binding Interests}"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <DataGrid x:Name="dgusers" Grid.Row="1" ItemsSource="{Binding Users}" ColumnWidth="*"  Margin="0,10,0,10" RenderTransformOrigin="0.5,0.5" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name"/>
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name"/>
+                <DataGridTextColumn Binding="{Binding AddressLine1}" Header="Address Line 1"/>
+                <DataGridTextColumn Binding="{Binding AddressLine2}" Header="Address Line 2"/>
+                <DataGridTextColumn Binding="{Binding City}" Header="City"/>
+                <DataGridTextColumn Binding="{Binding State}" Header="State"/>
+                <DataGridTextColumn Binding="{Binding Zipcode}" Header="Zipcode"/>
+                <DataGridTextColumn Binding="{Binding UserPhoto}" Header="Photo"/>
+                <DataGridTextColumn Binding="{Binding Interests}" Header="Interests"/>
+            </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="0" 
                    TextWrapping="Wrap" Text="Enter Name to Search:" VerticalAlignment="Top" />

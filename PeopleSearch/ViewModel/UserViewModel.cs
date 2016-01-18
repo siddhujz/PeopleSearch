@@ -7,6 +7,8 @@ using PeopleSearch.Services;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Drawing;
+using System.IO;
 
 namespace PeopleSearch.ViewModel
 {
@@ -75,6 +77,10 @@ namespace PeopleSearch.ViewModel
         /// <param name="user"></param>
         void SaveUser(User user)
         {
+            Color bgcolor = Color.Black;
+            Color fcolor = Color.WhiteSmoke;
+            Image image = ConvertTextToImage(user.FirstName.Substring(0, 1) + user.LastName.Substring(0,1), "Times New Roman", 25, bgcolor, fcolor, 50, 50);
+            user.UserPhoto = ImageToByteArray(image);
             _dataService.CreateUser(
                 (UserId, error) =>
                 {
@@ -95,5 +101,36 @@ namespace PeopleSearch.ViewModel
                     }
                 }, user);
         }
+
+        public Bitmap ConvertTextToImage(string txt, string fontname, int fontsize, Color bgcolor, Color fcolor, int width, int Height)
+        {
+            Bitmap bmp = new Bitmap(width, Height);
+            using (Graphics graphics = Graphics.FromImage(bmp))
+            { 
+                Font font = new Font(fontname, fontsize);
+                Brush brush = Brushes.Black;
+                graphics.FillRectangle(brush, 0, 0, bmp.Width, bmp.Height);
+                graphics.DrawString(txt, font, new SolidBrush(fcolor), 0, 0);
+                graphics.Flush();
+                font.Dispose();
+                graphics.Dispose();
+            }
+            return bmp;
+        }
+
+        public byte[] ImageToByteArray(Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        public Image ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+        }
+
     }
 }
