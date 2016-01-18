@@ -1,9 +1,12 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using PeopleSearch.MessageInfrastructure;
 using PeopleSearch.Model;
 using PeopleSearch.Services;
 using System;
+using System.Linq;
+using System.Windows;
 
 namespace PeopleSearch.ViewModel
 {
@@ -15,6 +18,8 @@ namespace PeopleSearch.ViewModel
     /// </summary>
     public class UserViewModel : ViewModelBase
     {
+        private readonly IDataService _dataService;
+
         /// <summary>
         /// The declaration used in case of adding new user
         /// </summary>
@@ -30,12 +35,19 @@ namespace PeopleSearch.ViewModel
             }
         }
 
+        #region Command Object Declarations
+        public RelayCommand<User> SaveUserCommand { get; set; }
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the UserViewModel class.
         /// </summary>
-        public UserViewModel()
+        public UserViewModel(IDataService dataService)
         {
-            Receive();
+            _dataService = dataService;
+            ReceiveAddUserMessage();
+
+            SaveUserCommand = new RelayCommand<User>(SaveUser);
         }
 
         /// <summary>
@@ -43,7 +55,7 @@ namespace PeopleSearch.ViewModel
         /// and assigning it the the UserNotifiable property so that
         /// it will be displayed on the view
         /// </summary>
-        void Receive()
+        void ReceiveAddUserMessage()
         {
             Messenger.Default.Register<MessageCommunicator>(this, MessengerToken.AddUser, (user) => ShowAddUser(user));
         }
@@ -54,6 +66,34 @@ namespace PeopleSearch.ViewModel
 
             WindowService windowService = new WindowService();
             windowService.showWindow(this);
+        }
+
+        /// <summary>
+        /// Method to Save User. Once the User is added in the database
+        /// it will be added in the Users observable collection and Property Changed will be raised
+        /// </summary>
+        /// <param name="user"></param>
+        void SaveUser(User user)
+        {
+            _dataService.CreateUser(
+                (UserId, error) =>
+                {
+                    if (error != null)
+                    {
+                        // Report error here
+                        Console.WriteLine("The following exception has been raised: " + error);
+                        return;
+                    }
+                    if (UserId != 0)
+                    {
+                        //Close the current focused window
+                        var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                        window.Close();
+
+                        //Send a message to Main ViewModel for refreshing the People on the MainWindow.
+                        Messenger.Default.Send(new NotificationMessage("RefreshUsers"), MessengerToken.RefreshUsers);
+                    }
+                }, user);
         }
     }
 }

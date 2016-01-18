@@ -8,6 +8,7 @@ namespace PeopleSearch.Services
 {
     public enum MessengerToken
     {
-        AddUser
+        AddUser,
+        RefreshUsers
     }
 }

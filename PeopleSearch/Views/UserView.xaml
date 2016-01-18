@@ -7,17 +7,50 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d" 
-             d:DesignHeight="360" d:DesignWidth="480">
-    <Grid>
+             d:DesignHeight="360" d:DesignWidth="480"
+             DataContext="{Binding UserVM, Source={StaticResource Locator}}">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        
-        
+
+        <TextBlock Grid.Row="1" Text="User Id:"/>
+        <TextBlock Grid.Row="2" Text="First Name:"/>
+        <TextBlock Grid.Row="3" Text="Last Name:"/>
+        <TextBlock Grid.Row="4" Text="Date of Birth:"/>
+        <TextBlock Grid.Row="5" Text="Address Line 1:"/>
+        <TextBlock Grid.Row="6" Text="Address Line 2:"/>
+        <TextBlock Grid.Row="7" Text="City:"/>
+        <TextBlock Grid.Row="8" Text="State:"/>
+        <TextBlock Grid.Row="9" Text="Zip Code:"/>
+        <TextBlock Grid.Row="10" Text="Interests:"/>
+
+        <TextBox Grid.Column="1" Grid.Row="1" Height="30" Text="{Binding User.UserId ,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Height="30" Text="{Binding User.FirstName ,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Height="30" Text="{Binding User.LastName,Mode=TwoWay}"/>
+        <DatePicker Grid.Column="1" Grid.Row="4" Height="30" Text="{Binding User.DateOfBirth,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Height="30" Text="{Binding User.AddressLine1,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Height="30" Text="{Binding User.AddressLine2,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="7" Height="30" Text="{Binding User.City,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="8" Height="30" Text="{Binding User.State,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="9" Height="30" Text="{Binding User.Zipcode,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="10" Height="30" Text="{Binding User.Interests,Mode=TwoWay}"/>
+
+        <Button Grid.Column="1" Grid.Row="11" Content="Save Person" HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" Command="{Binding SaveUserCommand}" CommandParameter="{Binding User}"/>
     </Grid>
 </UserControl>

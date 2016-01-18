@@ -10,5 +10,6 @@ namespace PeopleSearch.Model
     {
         void GetUsers(Action<ObservableCollection<User>, Exception> callback);
         void GetUsersByName(Action<ObservableCollection<User>, Exception> callback, String username);
+        void CreateUser(Action<int, Exception> callback, User user);
     }
 }

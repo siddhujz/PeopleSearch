@@ -48,5 +48,24 @@ namespace PeopleSearch.Model
                 callback(new ObservableCollection<User>(), e);
             }
         }
+
+        //Method to add user
+        public void CreateUser(Action<int, Exception> callback, User user)
+        {
+            try
+            {
+                //Check if a tuple in the table is present in the database, and add it, if it's not available.
+                if (ctx.Entry(user).State == System.Data.Entity.EntityState.Detached)
+                {
+                    ctx.Users.Add(user);
+                }
+                ctx.SaveChanges();
+                callback(user.UserId, null);
+            }
+            catch (Exception e)
+            {
+                callback(0, e);
+            }
+        }
     }
 }

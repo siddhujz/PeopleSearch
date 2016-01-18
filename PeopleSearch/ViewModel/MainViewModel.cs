@@ -71,7 +71,9 @@ namespace PeopleSearch.ViewModel
 
             SearchUsersCommand = new RelayCommand(SearchUsers);
 
-            SendUserCommand = new RelayCommand(SendEstimate);
+            SendUserCommand = new RelayCommand(SendUser);
+
+            ReceiveRefreshUsersMessage();
         }
 
 
@@ -125,12 +127,35 @@ namespace PeopleSearch.ViewModel
         /// The method to send a message to add a new user
         /// to the UserViewModel
         /// </summary>
-        public void SendEstimate()
+        public void SendUser()
         {
             User user = new User();
 
             //Send User as a message to UserViewModel for opening a new window.
             Messenger.Default.Send<MessageCommunicator>(new MessageCommunicator() { User = user }, MessengerToken.AddUser);
+        }
+
+        /// <summary>
+        /// The Method is used to Receive RefreshUsersMessage from the UserViewModel
+        /// so that it will refresh the Users on the Main Window
+        /// </summary>
+        public void ReceiveRefreshUsersMessage()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, MessengerToken.RefreshUsers, (message) => ShowRefreshedUsers(message));
+        }
+
+        public void ShowRefreshedUsers(NotificationMessage message)
+        {
+            // Checks the actual content of the message.
+            switch (message.Notification)
+            {
+                case "RefreshUsers":
+                    GetUsers();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         ////public override void Cleanup()
