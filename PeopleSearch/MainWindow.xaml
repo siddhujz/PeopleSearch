@@ -8,6 +8,7 @@
         Height="900"
         Width="1280"
         Title="People Search"
+        Margin="10"
         WindowState="Maximized"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
     

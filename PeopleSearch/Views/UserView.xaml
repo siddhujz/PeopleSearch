@@ -29,28 +29,28 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="1" Text="User Id:"/>
-        <TextBlock Grid.Row="2" Text="First Name:"/>
-        <TextBlock Grid.Row="3" Text="Last Name:"/>
-        <TextBlock Grid.Row="4" Text="Date of Birth:"/>
-        <TextBlock Grid.Row="5" Text="Address Line 1:"/>
-        <TextBlock Grid.Row="6" Text="Address Line 2:"/>
-        <TextBlock Grid.Row="7" Text="City:"/>
-        <TextBlock Grid.Row="8" Text="State:"/>
-        <TextBlock Grid.Row="9" Text="Zip Code:"/>
-        <TextBlock Grid.Row="10" Text="Interests:"/>
+        <TextBlock Grid.Row="1" Text="User Id:" Visibility="Hidden"/>
+        <TextBlock Grid.Row="1" Text="First Name:"/>
+        <TextBlock Grid.Row="2" Text="Last Name:"/>
+        <TextBlock Grid.Row="3" Text="Date of Birth:"/>
+        <TextBlock Grid.Row="4" Text="Address Line 1:"/>
+        <TextBlock Grid.Row="5" Text="Address Line 2:"/>
+        <TextBlock Grid.Row="6" Text="City:"/>
+        <TextBlock Grid.Row="7" Text="State:"/>
+        <TextBlock Grid.Row="8" Text="Zip Code:"/>
+        <TextBlock Grid.Row="9" Text="Interests:"/>
 
-        <TextBox Grid.Column="1" Grid.Row="1" Height="30" Text="{Binding User.UserId ,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Height="30" Text="{Binding User.FirstName ,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Height="30" Text="{Binding User.LastName,Mode=TwoWay}"/>
-        <DatePicker Grid.Column="1" Grid.Row="4" Height="30" Text="{Binding User.DateOfBirth,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="5" Height="30" Text="{Binding User.AddressLine1,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="6" Height="30" Text="{Binding User.AddressLine2,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="7" Height="30" Text="{Binding User.City,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="8" Height="30" Text="{Binding User.State,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="9" Height="30" Text="{Binding User.Zipcode,Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="10" Height="30" Text="{Binding User.Interests,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Height="30" Text="{Binding User.UserId ,Mode=TwoWay}" Visibility="Hidden"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Height="30" Text="{Binding User.FirstName ,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Height="30" Text="{Binding User.LastName,Mode=TwoWay}"/>
+        <DatePicker Grid.Column="1" Grid.Row="3" Height="30" Text="{Binding User.DateOfBirth,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="4" Height="30" Text="{Binding User.AddressLine1,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="5" Height="30" Text="{Binding User.AddressLine2,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="6" Height="30" Text="{Binding User.City,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="7" Height="30" Text="{Binding User.State,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="8" Height="30" Text="{Binding User.Zipcode,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="9" Height="30" Text="{Binding User.Interests,Mode=TwoWay}"/>
 
-        <Button Grid.Column="1" Grid.Row="11" Content="Save Person" HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" Command="{Binding SaveUserCommand}" CommandParameter="{Binding User}"/>
+        <Button Grid.Column="1" Grid.Row="10" Content="Save Person" HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" Command="{Binding SaveUserCommand}" CommandParameter="{Binding User}"/>
     </Grid>
 </UserControl>

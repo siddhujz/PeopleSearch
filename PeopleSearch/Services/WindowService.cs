@@ -7,16 +7,14 @@ using System.Windows;
 
 namespace PeopleSearch.Services
 {
-    class WindowService : IWindowService
+    class WindowService : Window, IWindowService
     {
         public void showWindow(object viewModel)
         {
             var window = new Window();
-            window.WindowState = WindowState.Maximized;
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.Content = viewModel;
-            //window.DataContext = viewModel;
-            window.Show();
+            window.Owner = Application.Current.MainWindow;
+            window.ShowDialog();
         }
     }
 }
