@@ -12,6 +12,7 @@
     <Grid>
         <Grid.Resources>
             <converts:BinaryImageConverter x:Key="imgConverter" />
+            <converts:DateOfBirthToAgeConverter x:Key="ageConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
@@ -35,6 +36,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200"></ColumnDefinition>
@@ -43,8 +45,9 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Row="0" Grid.Column="1" Text="Name" />
-                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Address" />
-                            <TextBlock Grid.Row="6" Grid.Column="1" Text="Interests" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="Age" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="Address" />
+                            <TextBlock Grid.Row="7" Grid.Column="1" Text="Interests" />
 
                             <TextBlock Grid.Row="0" Grid.Column="2">
                                 <TextBlock.Text>
@@ -54,12 +57,13 @@
                                     </MultiBinding>
                                 </TextBlock.Text>
                             </TextBlock>
-                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding AddressLine1}" />
-                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding AddressLine2}" />
-                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding City}" />
-                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding State}" />
-                            <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Zipcode}" />
-                            <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Interests}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Path=DateOfBirth, Converter={StaticResource ageConverter}}" />
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding AddressLine1}" />
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding AddressLine2}" />
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding City}" />
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding State}" />
+                            <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Zipcode}" />
+                            <TextBlock Grid.Row="7" Grid.Column="2" Text="{Binding Interests}"/>
 
                             <!-- Image Control -->
                             <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="8" Source="{Binding Path=UserPhoto, Converter={StaticResource imgConverter}}" Stretch="UniformToFill" StretchDirection="Both" Margin="10">
@@ -67,7 +71,6 @@
                                     <DropShadowBitmapEffect Color="DarkGray" />
                                 </Image.BitmapEffect>
                             </Image>
-                            <TextBlock Grid.Row="6" Grid.Column="2" Text="{Binding Interests}"/>
                         </Grid>
                     </WrapPanel>
                 </DataTemplate>
